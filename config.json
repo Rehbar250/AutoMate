@@ -1,0 +1,22 @@
+{
+    "sharepoint": {
+        "site_id": "YOUR_SITE_ID_HERE",
+        "list_id": "YOUR_LIST_ID_HERE",
+        "select_fields": ["id", "title", "createdDateTime", "Author", "Status"],
+        "polling_interval_minutes": 2
+    },
+    "powerbi": {
+        "workspace_id": "YOUR_WORKSPACE_ID_HERE",
+        "dataset_id": "YOUR_DATASET_ID_HERE",
+        "table_name": "SharePointData",
+        "trigger_refresh": false,
+        "push_mode": true
+    },
+    "data_processing": {
+        "drop_duplicates_subset": ["id"],
+        "fillna_values": {
+            "Status": "Pending",
+            "Author": "Unknown"
+        }
+    }
+}
