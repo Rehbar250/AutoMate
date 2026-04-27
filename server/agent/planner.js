@@ -132,7 +132,14 @@ Rules:
       response_format: { type: 'json_object' }
     });
 
-    const plan = JSON.parse(response.choices[0].message.content);
+    let content = response.choices[0].message.content;
+    if (content.trim().startsWith('```json')) {
+      content = content.trim().replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    } else if (content.trim().startsWith('```')) {
+      content = content.trim().replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    const plan = JSON.parse(content);
     return plan;
   } catch (error) {
     console.error('LLM planning failed, falling back to demo mode:', error.message);
