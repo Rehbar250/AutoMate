@@ -6,3 +6,5 @@ client/.env
 server/.env
 client/dist/
 .DS_Store
+*.db
+server/automate.db

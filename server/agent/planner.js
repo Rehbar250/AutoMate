@@ -122,7 +122,7 @@ Rules:
 
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: process.env.OPENAI_API_KEY?.startsWith('AIza') ? 'gemini-1.5-flash' : 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: prompt }

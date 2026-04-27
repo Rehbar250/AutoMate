@@ -15,8 +15,12 @@ let openai = null;
 try {
   const OpenAI = require('openai');
   if (process.env.OPENAI_API_KEY) {
-    openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-    console.log('✅ OpenAI API connected — using LLM-powered planning');
+    const isGemini = process.env.OPENAI_API_KEY.startsWith('AIza');
+    openai = new OpenAI({ 
+      apiKey: process.env.OPENAI_API_KEY,
+      baseURL: isGemini ? 'https://generativelanguage.googleapis.com/v1beta/openai/' : undefined
+    });
+    console.log(`✅ ${isGemini ? 'Gemini' : 'OpenAI'} API connected — using LLM-powered planning`);
   } else {
     console.log('ℹ️  No OPENAI_API_KEY found — using intelligent demo mode');
   }
