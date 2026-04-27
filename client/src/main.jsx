@@ -7,7 +7,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/AutoMate">
+    <BrowserRouter basename={import.meta.env.DEV ? '/' : '/AutoMate'}>
       <AuthProvider>
         <App />
       </AuthProvider>

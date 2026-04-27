@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  base: '/AutoMate/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/AutoMate/' : '/',
   plugins: [react()],
   server: {
     port: 5173,
@@ -10,4 +10,4 @@ export default defineConfig({
       '/api': { target: 'http://localhost:3001', changeOrigin: true }
     }
   }
-})
+}))
