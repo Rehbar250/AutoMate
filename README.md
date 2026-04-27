@@ -1,34 +1,119 @@
-# AutoMate: SharePoint to Power BI Sync Agent
+# ⚡ AutoMate — AI Agent Automation Platform
 
-A production-ready Python automation agent designed to synchronize Data from Microsoft SharePoint lists to Power BI. It automatically polls SharePoint, cleans and validates the data, and pushes it directly into Power BI datasets in near real-time.
+An intelligent, AI-powered automation platform that understands natural language, plans multi-step tasks, and executes them using a modular tool system — like Zapier meets ChatGPT.
 
-## Features
-- **Microsoft Entra ID OAuth2**: App-only authentication using Service Principals.
-- **Data Processing Layer**: Utilizes `pandas` to validate, deduplicate, and handle missing values.
-- **Dual Mode Power BI Integration**: Can explicitly push to Power BI streaming datasets or trigger dataset refreshes.
-- **Plug-and-play Configuration**: Adjust settings, mapping, and schemas using `config.json`.
+## 🎯 What It Does
 
-## Setup
+Type a command like **"Generate a report from sales data"** and the AI agent will:
+1. 🧠 Understand your intent
+2. 📋 Plan a multi-step execution strategy
+3. 🔧 Select and chain the right tools (API fetcher, data analyzer, file processor, etc.)
+4. ⚡ Execute each step with real-time progress updates
+5. 📊 Deliver results with full reasoning transparency
 
-1. **Install Python 3.9+**
-2. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Configure Environment Variables**:
-   Copy `.env.example` to `.env` and fill in your Entra ID application credentials.
-   ```bash
-   cp .env.example .env
-   ```
-4. **Configure application in `config.json`**:
-   Fill in your `site_id`, `list_id`, `workspace_id`, and `dataset_id`.
+## ✨ Key Features
 
-## Usage
+| Feature | Description |
+|---------|-------------|
+| **AI Agent Engine** | Natural language → structured task plans → automated execution |
+| **Chain-of-Thought** | See the agent's reasoning for each step |
+| **5 Built-in Tools** | Email sender, API fetcher, data analyzer, file processor, web scraper |
+| **Real-Time Streaming** | SSE-powered live execution logs with step-by-step progress |
+| **Workflow Builder** | Create, save, and re-run reusable automation workflows |
+| **Memory System** | Context-aware responses that learn from your usage patterns |
+| **Execution History** | Full audit trail with expandable step details |
+| **JWT Authentication** | Secure user accounts with bcrypt password hashing |
+| **Demo Mode** | Works without an API key using intelligent task simulation |
 
-Run the agent locally:
+## 🏗️ Architecture
 
-```bash
-python -m src.main
+```
+┌─────────────────────────────────────────────────┐
+│  React Frontend (Vite)                          │
+│  ┌──────────┬──────────┬──────────┬──────────┐  │
+│  │Dashboard │ AI Agent │Workflows │ History  │  │
+│  │          │ (Chat)   │ Builder  │          │  │
+│  └──────────┴──────────┴──────────┴──────────┘  │
+└───────────────────┬─────────────────────────────┘
+                    │ REST API + SSE
+┌───────────────────┴─────────────────────────────┐
+│  Node.js / Express Backend                      │
+│  ┌──────────┬──────────┬──────────┬──────────┐  │
+│  │ Agent    │ Planner  │ Executor │ Memory   │  │
+│  │ Engine   │ (LLM)    │          │ System   │  │
+│  └──────────┴──────────┴──────────┴──────────┘  │
+│  ┌──────────────────────────────────────────┐   │
+│  │ Tool Registry                             │   │
+│  │ 📧 Email  🌐 API  📊 Data  📁 File  🔍 Web │   │
+│  └──────────────────────────────────────────┘   │
+│  ┌──────────┐                                   │
+│  │ SQLite   │ Users, Workflows, Executions, Logs│
+│  └──────────┘                                   │
+└─────────────────────────────────────────────────┘
 ```
 
-The system will execute an immediate sync and then begin scheduling polls based on the `polling_interval_minutes` defined in your config.
+## 🛠️ Tech Stack
+
+- **Frontend**: React 19 + Vite, React Router, vanilla CSS with design system
+- **Backend**: Node.js + Express, JWT auth, SSE streaming
+- **Database**: SQLite (via sql.js — zero config, portable)
+- **AI**: OpenAI API (optional — demo mode works without it)
+
+## 🚀 Quick Start
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/yourusername/AutoMate.git
+cd AutoMate
+
+# 2. Install all dependencies
+npm run install:all
+
+# 3. Set up environment (optional — demo mode works without API key)
+cp .env.example .env
+# Edit .env to add your OPENAI_API_KEY for real AI planning
+
+# 4. Start the dev servers
+npm run dev
+```
+
+The app will be available at **http://localhost:5173**
+
+## 📁 Project Structure
+
+```
+AutoMate/
+├── client/                # React frontend
+│   └── src/
+│       ├── api/           # API client
+│       ├── context/       # Auth context
+│       ├── components/    # Layout components
+│       └── pages/         # Dashboard, Agent, Workflows, History, Tools
+├── server/                # Express backend
+│   ├── agent/             # AI engine, planner, executor, memory
+│   ├── db/                # SQLite database module
+│   ├── middleware/        # JWT auth middleware
+│   ├── routes/            # API route handlers
+│   └── tools/             # Modular tool system
+└── legacy/                # Original SharePoint→PowerBI sync agent
+```
+
+## 🔑 Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `JWT_SECRET` | Yes | Secret key for JWT token signing |
+| `OPENAI_API_KEY` | No | OpenAI API key (enables real AI planning) |
+| `PORT` | No | Backend server port (default: 3001) |
+
+## 💡 Demo Mode
+
+Without an OpenAI API key, the platform runs in **intelligent demo mode**:
+- Uses keyword-based intent classification
+- Generates realistic multi-step plans
+- Executes real tools with simulated data
+- Full chain-of-thought reasoning displayed
+
+## 📜 License
+
+MIT

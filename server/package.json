@@ -1,0 +1,21 @@
+{
+  "name": "automate-server",
+  "version": "2.0.0",
+  "description": "AutoMate AI Agent backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "node-cron": "^3.0.3",
+    "openai": "^4.77.0",
+    "sql.js": "^1.11.0",
+    "uuid": "^11.0.3"
+  }
+}
